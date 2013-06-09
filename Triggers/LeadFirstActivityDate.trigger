@@ -8,6 +8,7 @@ trigger LeadFirstActivityDate on Task (before insert, before update) {
             }
         }
     }
+    
     List<Lead> leadsToUpdate=[SELECT Id, First_Activity_Date__c FROM Lead WHERE Id IN :leadIds AND IsConverted=FALSE AND First_Activity_Date__c=NULL];
     For (Lead l:leadsToUpdate){
         l.First_Activity_Date__c = date.today();
